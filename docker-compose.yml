@@ -8,7 +8,8 @@ services:
     volumes:
       - redis-data:/data
     command: redis-server --appendonly yes
-
+    networks:            
+      - backendnetwork   
   frontend:
     build:
       context: ./frontend
