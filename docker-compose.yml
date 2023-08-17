@@ -7,7 +7,7 @@ services:
       - "6380:6380"
     volumes:
       - redis-data:/data
-    command: redis-server --appendonly yes
+    
     networks:            
       - backendnetwork   
   frontend:
