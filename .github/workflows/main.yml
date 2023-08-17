@@ -25,11 +25,11 @@ jobs:
         echo "${{ secrets.KUBECONFIG_FILE }}" > kubeconfig
         export KUBECONFIG=kubeconfig
 
-    - name: Deploy to Kubernetes
+    - name: Deploy frontend Kubernetes
       run: |
         kubectl apply -f frontend/kubernetes/frontend-deployment.yaml
         
-    - name: Deploy to Kubernetes
+    - name: Deploy backend Kubernetes
       run: |
         kubectl apply -f backend/kubernetes/backend-deployment.yaml
 
