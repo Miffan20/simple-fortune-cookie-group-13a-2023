@@ -47,8 +47,9 @@ jobs:
         run: echo "$docker_password" | docker login -u "$docker_username" --password-stdin
 
       - name: Build Docker image
-        run: docker build -t $docker_username/myapp:$GIT_COMMIT .
+        run: docker build -t $docker_username/myapp:$GIT_COMMIT ./backend
 
       - name: Push Docker image to DockerHub
         run: docker push $docker_username/myapp:$GIT_COMMIT
+
 
