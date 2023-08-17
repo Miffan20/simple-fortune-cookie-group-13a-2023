@@ -17,7 +17,7 @@ COPY foredis.go main.go util.go ./
 RUN go build -o backend-app
 
 #exposing the port used
-EXPOSE 8000
+EXPOSE 9000
 
 #run the application
 
