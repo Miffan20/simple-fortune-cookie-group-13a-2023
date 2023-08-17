@@ -7,12 +7,11 @@ services:
       - "6380:6380"
     volumes:
       - redis-data:/data
-    command: redis-server --appendonly yes
+    
     networks:            
       - backendnetwork   
   frontend:
-    build:
-      context: ./frontend
+    image: frontend-image
     ports:
       - "8080:8080"
     depends_on:
@@ -23,14 +22,16 @@ services:
       - BACKEND_DNS=backend
 
   backend:
-    build:
-      context: ./backend
+    image: backend-image
     ports:
       - "9000:9000"
     networks:
       - backendnetwork
     environment:
       - REDIS_DNS=redis-backend
+    depends_on:
+      - redis
+    
 networks:
   backendnetwork:
 volumes:
