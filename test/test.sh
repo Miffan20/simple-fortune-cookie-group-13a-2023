@@ -1,6 +1,3 @@
-#!/bin/bash
-
-# Get the hostname of the machine running the script
 HOSTNAME=$(hostname)
 
 APP_URL="http://${HOSTNAME}:8080/"
