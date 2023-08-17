@@ -31,6 +31,9 @@ services:
       - backendnetwork
     environment:
       - REDIS_DNS=redis-backend
+    depends_on:
+      - redis
+    
 networks:
   backendnetwork:
 volumes:
