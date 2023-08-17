@@ -28,6 +28,8 @@ services:
       - "9000:9000"
     networks:
       - backendnetwork
+    environment:
+      - REDIS_DNS=redis-backend
 networks:
   backendnetwork:
 volumes:
