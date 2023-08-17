@@ -84,10 +84,10 @@ jobs:
           export KUBECONFIG=$(pwd)/kubeconfig
 
       - name: Deploy test frontend Kubernetes
-        run: kubectl --kubeconfig kubeconfig apply -f frontend/kubernetes/frontend-test-deployment.yaml
+        run: kubectl --kubeconfig kubeconfig apply -f frontend/kubernetes/frontend-deployment.yaml
 
       - name: Deploy test backend Kubernetes
-        run: kubectl --kubeconfig kubeconfig apply -f backend/kubernetes/backend-test-deployment.yaml
+        run: kubectl --kubeconfig kubeconfig apply -f backend/kubernetes/backend-deployment.yaml
 
       - name: Run Test Script
         run: ./test.sh
