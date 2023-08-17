@@ -23,8 +23,7 @@ services:
       - BACKEND_DNS=backend
 
   backend:
-    build:
-      context: ./backend
+    image: backend-image
     ports:
       - "9000:9000"
     networks:
