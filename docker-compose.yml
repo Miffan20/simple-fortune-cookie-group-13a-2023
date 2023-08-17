@@ -11,8 +11,7 @@ services:
     networks:            
       - backendnetwork   
   frontend:
-    build:
-      context: ./frontend
+    image: frontend-image
     ports:
       - "8080:8080"
     depends_on:
