@@ -66,7 +66,7 @@ jobs:
           export KUBECONFIG=kubeconfig
 
       - name: Deploy frontend Kubernetes
-        run: kubectl apply -f frontend/kubernetes/frontend-deployment.yaml
+        run: kubectl --kubeconfig kubeconfig apply -f frontend/kubernetes/frontend-deployment.yaml
         
       - name: Deploy backend Kubernetes
-        run: kubectl apply -f backend/kubernetes/backend-deployment.yaml
+        run: kubectl --kubeconfig kubeconfig apply -f backend/kubernetes/backend-deployment.yaml
