@@ -1,5 +1,15 @@
 version: '3'
 services:
+  redis:
+    image: redis:latest
+    container_name: redis-backend
+    ports:
+      - "6380:6380"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+    networks:            
+      - backendnetwork   
   frontend:
     build:
       context: ./frontend
@@ -19,5 +29,9 @@ services:
       - "9000:9000"
     networks:
       - backendnetwork
+    environment:
+      - REDIS_DNS=redis-backend
 networks:
   backendnetwork:
+volumes:
+  redis-data: 
