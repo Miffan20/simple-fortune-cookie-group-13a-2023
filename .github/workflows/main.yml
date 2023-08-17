@@ -8,8 +8,8 @@ on:
     branches:
       - main
 env: 
-  docker_username: ${{ secrets.DOCKERHUB_USERNAME }}
-  docker_password: ${{ secrets.DOCKERHUB_PASSWORD }}
+  docker_username: harun8
+  docker_password: mohammedharunabdi
   GIT_COMMIT: ${{ github.sha }}
 
 jobs:
