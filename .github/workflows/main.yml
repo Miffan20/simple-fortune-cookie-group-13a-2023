@@ -35,19 +35,21 @@ jobs:
 
   Docker-image:
     runs-on: ubuntu-latest
-    needs: build-and-test-frontend # reference the correct job name
+    needs: build-and-test-frontend
     permissions:
       packages: write
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2 # This will get the code to this job
+        uses: actions/checkout@v2
 
       - name: Login to DockerHub
         run: echo "$docker_password" | docker login -u "$docker_username" --password-stdin
 
       - name: Build Docker image
-        run: docker build -t $docker_username/myapp:$GIT_COMMIT .
+        run: docker build -t $docker_username/myapp:$GIT_COMMIT ./backend
 
       - name: Push Docker image to DockerHub
         run: docker push $docker_username/myapp:$GIT_COMMIT
+
+
