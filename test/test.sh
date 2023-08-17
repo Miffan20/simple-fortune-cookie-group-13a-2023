@@ -1,4 +1,11 @@
-RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" http://workstation-13.sdu1.eficode.academy:8080/)
+#!/bin/bash
+
+# Get the hostname of the machine running the script
+HOSTNAME=$(hostname)
+
+APP_URL="http://${HOSTNAME}:8080/"
+
+RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" $APP_URL)
 
 if [ "$RESPONSE" -eq 200 ]; then
   echo "Test passed: Site is up and accessible."
