@@ -89,8 +89,11 @@ jobs:
       - name: Deploy test backend Kubernetes
         run: kubectl --kubeconfig kubeconfig apply -f backend/kubernetes/backend-deployment.yaml
 
+
       - name: Run Test Script
-        run: ./test.sh
+        working-directory: test
+        run: bash test.sh
+        
 
       - name: Show Test Status
         if: steps.run_tests.outputs.test-result == 'pass'
