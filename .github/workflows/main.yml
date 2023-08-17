@@ -9,8 +9,8 @@ on:
       - main
 
 env: 
-  docker_username: harun8
-  docker_password: mohammedharunabdi
+  docker_username:  ${{ secrets.DOCKERHUB_USERNAME }}
+  docker_password:  ${{ secrets.DOCKERHUB_PASSWORD }}
   GIT_COMMIT: ${{ github.sha }}
 
 jobs:
