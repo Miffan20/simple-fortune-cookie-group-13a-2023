@@ -16,4 +16,4 @@ spec:
         - name: frontend-container
           image: harun8/myapp:721f349abf9cdd8baff38135ed4fb1c3129077bb
           ports:
-            - containerPort: 8080
+            - containerPort: 80
