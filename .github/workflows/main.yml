@@ -53,23 +53,6 @@ jobs:
       - name: Push Docker image to DockerHub
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/myapp:$GIT_COMMIT
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: Docker-image
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Kubeconfig
-        run: |
-          echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
-          export KUBECONFIG=kubeconfig
-
-      - name: Deploy frontend Kubernetes
-        run: kubectl --kubeconfig kubeconfig apply -f frontend/kubernetes/frontend-deployment.yaml
-        
-      - name: Deploy backend Kubernetes
-        run: kubectl --kubeconfig kubeconfig apply -f backend/kubernetes/backend-deployment.yaml
 
   test-deploy:
     runs-on: ubuntu-latest
@@ -98,4 +81,23 @@ jobs:
       - name: Show Test Status
         if: steps.run_tests.outputs.test-result == 'pass'
         run: echo "Test passed!" && exit 0 || exit 1
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test-deploy
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Kubeconfig
+        run: |
+          echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
+          export KUBECONFIG=kubeconfig
+
+      - name: Deploy frontend Kubernetes
+        run: kubectl --kubeconfig kubeconfig apply -f frontend/kubernetes/frontend-deployment.yaml
+        
+      - name: Deploy backend Kubernetes
+        run: kubectl --kubeconfig kubeconfig apply -f backend/kubernetes/backend-deployment.yaml
+
 
