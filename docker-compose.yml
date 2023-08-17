@@ -5,9 +5,19 @@ services:
       context: ./frontend
     ports:
       - "8080:8080"
+    depends_on:
+      - backend
+    networks:
+      - backendnetwork
+    environment:
+      - BACKEND_DNS=backend
 
   backend:
     build:
       context: ./backend
     ports:
-      - "6379:6379"
+      - "9000:9000"
+    networks:
+      - backendnetwork
+networks:
+  backendnetwork:
