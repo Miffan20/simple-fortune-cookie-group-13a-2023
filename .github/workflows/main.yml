@@ -13,6 +13,27 @@ env:
   GIT_COMMIT: ${{ github.sha }}
 
 jobs:
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Kubeconfig
+      run: |
+        echo "${{ secrets.KUBECONFIG }}" > kubeconfig
+        export KUBECONFIG=kubeconfig
+
+    - name: Deploy to Kubernetes
+      run: |
+        kubectl apply -f frontend/kubernetes/frontend-deployment.yaml
+        
+    - name: Deploy to Kubernetes
+      run: |
+        kubectl apply -f backend/kubernetes/backend-deployment.yaml
+
+        
   build-and-test-frontend:
     runs-on: ubuntu-latest
     
@@ -32,6 +53,7 @@ jobs:
       - name: Run tests
         working-directory: frontend
         run: go test ./...
+
 
   Docker-image:
     runs-on: ubuntu-latest
